@@ -1,0 +1,4 @@
+.vagrant/
+.ssh_config
+client_secret_*.apps.googleusercontent.com.json
+credentials.json
