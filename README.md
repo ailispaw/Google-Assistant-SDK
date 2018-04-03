@@ -89,3 +89,11 @@ Cf.) https://developers.google.com/assistant/sdk/guides/library/python/embed/ins
 Cf.)
 - https://developers.google.com/assistant/sdk/guides/library/python/embed/run-sample
 - https://developers.google.com/assistant/sdk/guides/service/python/embed/run-sample
+
+## Run in a Docker Container
+
+```
+vagrant@assistant:~$ mkdir -p .config
+vagrant@assistant:~$ docker run -ti --rm --group-add audio --device /dev/snd -v /vagrant/credentials.json:/vagrant/credentials.json:ro -v ~/.config:/home/docker/.config --hostname assistant ailispaw/google-assistant-sdk
+(env) docker@assistant:~$ 
+```

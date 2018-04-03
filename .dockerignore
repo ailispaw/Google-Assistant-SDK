@@ -1,0 +1,8 @@
+.vagrant/
+.gitignore
+.ssh_config
+
+README.md
+Vagrantfile
+
+credentials.json

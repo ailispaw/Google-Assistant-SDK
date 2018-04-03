@@ -14,19 +14,30 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :shell do |sh|
-    sh.privileged = false
     sh.inline = <<-EOT
-      sudo apt-get -q update
-      sudo apt-get -q -y install alsa-utils python3-dev python3-venv
-      python3 -m venv env
-      env/bin/pip install --upgrade pip setuptools wheel
-
-      sudo apt-get -q -y install portaudio19-dev libffi-dev libssl-dev
-      env/bin/pip install --upgrade google-assistant-library
-      env/bin/pip install --upgrade google-assistant-sdk[samples]
-      env/bin/pip install --upgrade google-auth-oauthlib[tool]
-
-      sudo /usr/sbin/alsactl init || true
+      apt-get -q update
+      apt-get -q -y install alsa-utils
+      /usr/sbin/alsactl init || true
     EOT
+  end
+
+  config.vm.provision :shell do |sh|
+    sh.inline = <<-EOT
+      apt-get -q update
+      apt-get -q -y install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+      curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+      apt-key fingerprint 0EBFCD88
+      add-apt-repository \
+         "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+      apt-get -q update
+      apt-get -q -y install docker-ce
+      usermod -aG docker vagrant
+      systemctl start docker
+    EOT
+  end
+
+  config.vm.provision :docker do |docker|
+    docker.build_image "/vagrant",
+      args: "-t ailispaw/google-assistant-sdk"
   end
 end
