@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
     vb.customize "pre-boot", [
       "modifyvm", :id,
       "--audio", "coreaudio",
-      "--audiocontroller", "hda",
+      "--audiocontroller", "ac97",
     ]
   end
 

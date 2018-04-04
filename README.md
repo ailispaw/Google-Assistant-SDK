@@ -12,7 +12,7 @@ You can see the available selections in the Settings of VirtualBox Manager while
     vb.customize "pre-boot", [
       "modifyvm", :id,
       "--audio", "coreaudio",
-      "--audiocontroller", "hda",
+      "--audiocontroller", "ac97",
     ]
   end
 ```
@@ -38,29 +38,25 @@ $ vagrant reload
 $ vagrant ssh
 vagrant@assistant:~$ aplay -l
 **** List of PLAYBACK Hardware Devices ****
-card 0: Intel [HDA Intel], device 0: STAC9221 A1 Analog [STAC9221 A1 Analog]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
-card 0: Intel [HDA Intel], device 1: STAC9221 A1 Digital [STAC9221 A1 Digital]
+card 0: I82801AAICH [Intel 82801AA-ICH], device 0: Intel ICH [Intel 82801AA-ICH]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 vagrant@assistant:~$ arecord -l
 **** List of CAPTURE Hardware Devices ****
-card 0: Intel [HDA Intel], device 0: STAC9221 A1 Analog [STAC9221 A1 Analog]
+card 0: I82801AAICH [Intel 82801AA-ICH], device 0: Intel ICH [Intel 82801AA-ICH]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
-card 0: Intel [HDA Intel], device 1: STAC9221 A1 Digital [STAC9221 A1 Digital]
-  Subdevices: 1/1
-  Subdevice #0: subdevice #0
-card 0: Intel [HDA Intel], device 2: STAC9221 A1 Alt Analog [STAC9221 A1 Alt Analog]
+card 0: I82801AAICH [Intel 82801AA-ICH], device 1: Intel ICH - MIC ADC [Intel 82801AA-ICH - MIC ADC]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 vagrant@assistant:~$ amixer set Master 100%
 Simple mixer control 'Master',0
-  Capabilities: pvolume pvolume-joined pswitch pswitch-joined
-  Playback channels: Mono
-  Limits: Playback 0 - 127
-  Mono: Playback 127 [100%] [0.00dB] [on]
+  Capabilities: pvolume pswitch pswitch-joined
+  Playback channels: Front Left - Front Right
+  Limits: Playback 0 - 31
+  Mono:
+  Front Left: Playback 31 [100%] [0.00dB] [on]
+  Front Right: Playback 31 [100%] [0.00dB] [on]
 vagrant@assistant:~$ aplay /usr/share/sounds/alsa/Front_Center.wav
 Playing WAVE '/usr/share/sounds/alsa/Front_Center.wav' : Signed 16 bit Little Endian, Rate 48000 Hz, Mono
 ```
