@@ -34,7 +34,6 @@ Cf.) https://developers.google.com/assistant/sdk/guides/library/python/embed/ins
 ## Test the Audio
 
 ```
-$ vagrant reload
 $ vagrant ssh
 vagrant@assistant:~$ aplay -l
 **** List of PLAYBACK Hardware Devices ****

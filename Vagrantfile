@@ -25,6 +25,8 @@ Vagrant.configure("2") do |config|
       env/bin/pip install --upgrade google-assistant-library
       env/bin/pip install --upgrade google-assistant-sdk[samples]
       env/bin/pip install --upgrade google-auth-oauthlib[tool]
+
+      sudo /usr/sbin/alsactl init || true
     EOT
   end
 end
